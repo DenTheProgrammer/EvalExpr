@@ -29,3 +29,4 @@ char    **ft_split_whitespaces(char *str);
 void ft_putchar(char c);
 void    ft_putnbr(int nb);
 int eval_expr(char *expr);
+int ft_atoi(char *str);

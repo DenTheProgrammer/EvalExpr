@@ -34,8 +34,8 @@ int eval_rpn(char **rpn)
 	int sp = 0;
 	while (*rpn)
 	{
-		if (*rpn[0] >= '0' && *rpn[0] <= '9')
-			stack[sp++] = atoi(*rpn);
+		if ((*rpn[0] >= '0' && *rpn[0] <= '9') || (*rpn[0] == '-' && *(*rpn + 1) != '\0'))
+			stack[sp++] = ft_atoi(*rpn);
 		else
 		{
 			stack[sp - 2] = calc(stack[sp-2], stack[sp-1], *rpn);

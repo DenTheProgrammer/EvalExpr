@@ -43,8 +43,13 @@ void	ft_putnbr(int nb)
 
 int eval_expr(char *expr)
 {
+	int i=0;
 	char **exp = ft_split_whitespaces(expr);
+//	while(exp[i])
+//		printf("\n%s\n",exp[i++]);/////////////???!
 	char **rpn = exp_to_rpn(exp);
+	while(rpn[i])
+		printf("%s ", rpn[i++]);
 	return (eval_rpn(rpn));	
 }
 

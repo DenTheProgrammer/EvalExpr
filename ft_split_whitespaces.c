@@ -33,6 +33,8 @@ int		get_word_count(char *str)
 	i = 0;
 	while (i < strlen)
 	{
+		if(str[i] == '(' || str[i] == ')')
+			count++;
 		if ((str[i] != ' ' && str[i] != '\t' && str[i] != '\n') &&
 		(str[i + 1] == ' ' || str[i + 1] == '\t' ||
 		str[i + 1] == '\0' || str[i + 1] == '\n'))
@@ -47,9 +49,15 @@ int		get_word_len(int start_ind, char *str)
 	int i;
 
 	i = 0;
+	if(str[start_ind] == '(' || str[start_ind] == ')')
+		return (1);
 	while (str[start_ind + i] != ' ' && str[start_ind + i] != '\t' &&
 	str[start_ind + i] != '\n' && str[start_ind + i] != '\0')
+	{
+		if(str[start_ind + i] == '(' || str[start_ind + i] == ')')
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
@@ -85,7 +93,7 @@ char	**ft_split_whitespaces(char *str)
 			res[curr_word_ind] = (char *)malloc(sizeof(char) * (word_len + 1));
 			str_copy(&str[i], &res[curr_word_ind][0], word_len + 1);
 			curr_word_ind++;
-			i += word_len;
+			i += word_len - 1;
 		}
 		i++;
 	}
