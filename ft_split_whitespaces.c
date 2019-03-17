@@ -6,7 +6,7 @@
 /*   By: mdebbi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 12:10:47 by mdebbi            #+#    #+#             */
-/*   Updated: 2019/03/16 21:26:55 by mdebbi           ###   ########.fr       */
+/*   Updated: 2019/03/17 17:04:42 by mdebbi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,36 @@ int		get_str_len(char *str)
 	return (i);
 }
 
-int		get_word_count(char *str)
+int        get_word_count(char *str)
 {
-	int i;
-	int strlen;
-	int count;
+    int i;
+    int strlen;
+    int count;
 
-	strlen = get_str_len(str);
-	count = 0;
-	i = 0;
-	while (i < strlen)
-	{
-		if(str[i] == '(' || str[i] == ')')
-			count++;
-		if ((str[i] != ' ' && str[i] != '\t' && str[i] != '\n') &&
-		(str[i + 1] == ' ' || str[i + 1] == '\t' ||
-		str[i + 1] == '\0' || str[i + 1] == '\n'))
-			count++;
-		i++;
-	}
-	return (count);
+    strlen = get_str_len(str);
+    count = 0;
+    i = 0;
+    while (i < strlen)
+    {
+        if(str[i] == '(' || str[i] == ')' || str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/' || str[i] == '%')
+            count++;
+        else if ((str[i] >= '0' && str[i] <= '9') && (str[i + 1] == '+' || str[i + 1] == '-' || str[i + 1] == '*' || str[i + 1] == '/' || str[i + 1] == '%' || str[i + 1] == ')' || str[i + 1] == '(' || str[i + 1] == ' ' || str[i + 1] == '\0'))
+            count++;
+        i++;
+    }
+    return (count);
 }
-
 int		get_word_len(int start_ind, char *str)
 {
 	int i;
 
 	i = 0;
-	if(str[start_ind] == '(' || str[start_ind] == ')')
+	if(str[start_ind] == '(' || str[start_ind] == ')' || str[start_ind] == '-' || str[start_ind] == '+' || str[start_ind] == '*' || str[start_ind] == '/' || str[start_ind] == '%')
 		return (1);
 	while (str[start_ind + i] != ' ' && str[start_ind + i] != '\t' &&
 	str[start_ind + i] != '\n' && str[start_ind + i] != '\0')
 	{
-		if(str[start_ind + i] == '(' || str[start_ind + i] == ')')
+		if(str[start_ind + i] == '(' || str[start_ind + i] == ')' || str[start_ind + i] == '-' || str[start_ind + i] == '+' || str[start_ind + i] == '*' || str[start_ind + i] == '/' || str[start_ind + i] == '%')
 			return (i);
 		i++;
 	}
@@ -77,7 +74,6 @@ void	str_copy(char *src, char *dest, int src_len)
 char	**ft_split_whitespaces(char *str)
 {
 	int		i;
-	int		word_start_index;
 	char	**res;
 	int		word_len;
 	int		curr_word_ind;
